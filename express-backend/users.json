@@ -6,5 +6,21 @@
     "firstname": "chirag",
     "lastname": "Devaliya",
     "gender": "male"
+  },
+  {
+    "id": "_aqu2uicg8",
+    "email": "demo@gmail.com",
+    "password": "$2a$08$8xv3O3ezRGtQtn3CqeU0UeNIC9ELst860yoJBjFGLOzo1J/n2YW36",
+    "firstname": "demo",
+    "lastname": "demo",
+    "gender": "male"
+  },
+  {
+    "id": "_bur53sp75",
+    "email": "demo2@gmail.com",
+    "password": "$2a$08$2/..YXxunL7LJPaq0Mzw/eb2BZAyPuQP6G0.z6cQHg7vf3qegQqGG",
+    "firstname": "suid",
+    "lastname": "demo",
+    "gender": "male"
   }
 ]

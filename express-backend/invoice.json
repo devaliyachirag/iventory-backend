@@ -1,0 +1,40 @@
+[
+  {
+    "id": "_u39og2yyu",
+    "userId": "_ys2x6es39",
+    "invoiceDate": "2024-07-02T18:30:00.000Z",
+    "invoiceNumber": "46787",
+    "invoiceDueDate": "2024-07-16T18:30:00.000Z",
+    "clientId": "_yef5ga4qw",
+    "items": [
+      {
+        "name": "key-board",
+        "amount": 120,
+        "quantity": 2,
+        "total": 240
+      },
+      {
+        "name": "mouse",
+        "amount": 100,
+        "quantity": 5,
+        "total": 500
+      }
+    ]
+  },
+  {
+    "id": "_itfqfswrj",
+    "userId": "_ys2x6es39",
+    "invoiceDate": "2024-06-30T18:30:00.000Z",
+    "invoiceNumber": "46787",
+    "invoiceDueDate": "2024-07-08T18:30:00.000Z",
+    "clientId": "_ugmjo3vh8",
+    "items": [
+      {
+        "name": "kdkd",
+        "amount": 350,
+        "quantity": 4,
+        "total": 1400
+      }
+    ]
+  }
+]
