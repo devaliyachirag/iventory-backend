@@ -9,16 +9,13 @@ const fs = require("fs");
 const app = express();
 const port = 5050;
 
-// Define the path to the users.json file, clients.json file, and invoice.json file
 const usersFilePath = path.join(__dirname, "users.json");
 const clientsFilePath = path.join(__dirname, "clients.json");
 const invoiceFilePath = path.join(__dirname, "invoice.json");
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Middleware to authenticate token
 const authenticateToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
@@ -27,7 +24,7 @@ const authenticateToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, "your_jwt_secret_key");
-    req.user = decoded; // Attach user information to request object
+    req.user = decoded; 
     next();
   } catch (error) {
     console.error("Error verifying token:", error);
@@ -35,7 +32,6 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-// Function to read data from a JSON file
 const readData = (filePath) => {
   if (!fs.existsSync(filePath)) {
     return [];
@@ -52,19 +48,15 @@ const readData = (filePath) => {
   }
 };
 
-// Function to write data to a JSON file
 const writeData = (filePath, data) => {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
 };
 
-// Function to generate a unique ID
 const generateId = () => "_" + Math.random().toString(36).substr(2, 9);
 
-// POST endpoint for registration
 app.post("/register", (req, res) => {
   const { email, password, firstname, lastname, gender } = req.body;
 
-  // Check if the user already exists
   const users = readData(usersFilePath);
   const userExists = users.find((u) => u.email === email);
 
@@ -72,13 +64,10 @@ app.post("/register", (req, res) => {
     return res.status(400).json({ message: "User already exists" });
   }
 
-  // Hash the password
   const hashedPassword = bcrypt.hashSync(password, 8);
 
-  // Generate unique user ID
   const userId = generateId();
 
-  // Save the user
   const newUser = {
     id: userId,
     email,
@@ -93,7 +82,6 @@ app.post("/register", (req, res) => {
   res.status(201).json({ message: "User registered successfully", userId });
 });
 
-// POST endpoint for login
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -110,7 +98,6 @@ app.post("/login", (req, res) => {
     return res.status(401).json({ message: "Invalid email or password" });
   }
 
-  // Generate JWT token
   const token = jwt.sign(
     { email: user.email, id: user.id },
     "your_jwt_secret_key",
@@ -122,7 +109,6 @@ app.post("/login", (req, res) => {
   res.status(200).json({ token });
 });
 
-// POST endpoint to add client data
 app.post("/add-client", authenticateToken, (req, res) => {
   const { id: userId } = req.user;
 
@@ -141,7 +127,6 @@ app.post("/add-client", authenticateToken, (req, res) => {
     gstNumber,
   };
 
-  // Read existing clients
   const clients = readData(clientsFilePath);
   clients.push(clientData);
   writeData(clientsFilePath, clients);
@@ -149,7 +134,6 @@ app.post("/add-client", authenticateToken, (req, res) => {
   res.status(201).json({ message: "Client added successfully" });
 });
 
-// POST endpoint to add invoice data
 app.post("/add-invoice", authenticateToken, (req, res) => {
   const { id: userId } = req.user;
 
@@ -167,7 +151,6 @@ app.post("/add-invoice", authenticateToken, (req, res) => {
     items,
   };
 
-  // Read existing invoices
   const invoices = readData(invoiceFilePath);
   invoices.push(invoiceData);
   writeData(invoiceFilePath, invoices);
@@ -175,24 +158,20 @@ app.post("/add-invoice", authenticateToken, (req, res) => {
   res.status(201).json({ message: "Invoice added successfully" });
 });
 
-// GET endpoint to fetch clients for the logged-in user
 app.get("/clients", authenticateToken, (req, res) => {
-  const userId = req.user.id; // Extract user ID from authenticated request
+  const userId = req.user.id; 
   const clients = readData(clientsFilePath);
   const userClients = clients.filter((client) => client.userId === userId);
   res.json(userClients);
 });
 
-// GET endpoint to fetch all invoices
-// GET endpoint to fetch invoices for the logged-in user
 app.get("/user-invoices", authenticateToken, (req, res) => {
-  const userId = req.user.id; // Extract user ID from authenticated request
+  const userId = req.user.id;
   const invoices = readData(invoiceFilePath);
   const userInvoices = invoices.filter((invoice) => invoice.userId === userId);
   res.json(userInvoices);
 });
 
-// DELETE endpoint to delete a client by ID
 app.delete("/delete-client/:id", authenticateToken, (req, res) => {
   const { id: clientId } = req.params;
   const userId = req.user.id;
@@ -214,7 +193,6 @@ app.delete("/delete-client/:id", authenticateToken, (req, res) => {
   res.status(200).json({ message: "Client deleted successfully" });
 });
 
-// PUT endpoint to update a client by ID
 app.put("/update-client/:id", authenticateToken, (req, res) => {
   const { id: clientId } = req.params;
   const userId = req.user.id;
@@ -246,7 +224,6 @@ app.put("/update-client/:id", authenticateToken, (req, res) => {
 
   res.status(200).json({ message: "Client updated successfully" });
 });
-// PUT endpoint to update an invoice by ID
 app.put("/update-invoice/:id", authenticateToken, (req, res) => {
   const { id: invoiceId } = req.params;
   const userId = req.user.id;
@@ -278,7 +255,6 @@ app.put("/update-invoice/:id", authenticateToken, (req, res) => {
   res.status(200).json({ message: "Invoice updated successfully" });
 });
 
-// DELETE endpoint to delete an invoice by ID
 app.delete("/delete-invoice/:id", authenticateToken, (req, res) => {
   const { id: invoiceId } = req.params;
   const userId = req.user.id;
