@@ -164,6 +164,21 @@ app.get("/clients", authenticateToken, (req, res) => {
   const userClients = clients.filter((client) => client.userId === userId);
   res.json(userClients);
 });
+app.get("/client/:id", authenticateToken, (req, res) => {
+  const { id: clientId } = req.params;
+  const userId = req.user.id;
+
+  const clients = readData(clientsFilePath);
+  const client = clients.find(
+    (client) => client.id === clientId && client.userId === userId
+  );
+
+  if (!client) {
+    return res.status(404).json({ message: "Client not found or unauthorized" });
+  }
+
+  res.json(client);
+});
 
 app.get("/user-invoices", authenticateToken, (req, res) => {
   const userId = req.user.id;
@@ -191,6 +206,21 @@ app.delete("/delete-client/:id", authenticateToken, (req, res) => {
   writeData(clientsFilePath, clients);
 
   res.status(200).json({ message: "Client deleted successfully" });
+});
+app.get("/invoice/:id", authenticateToken, (req, res) => {
+  const { id: invoiceId } = req.params;
+  const userId = req.user.id;
+
+  const invoices = readData(invoiceFilePath);
+  const invoice = invoices.find(
+    (invoice) => invoice.id === invoiceId && invoice.userId === userId
+  );
+
+  if (!invoice) {
+    return res.status(404).json({ message: "Invoice not found or unauthorized" });
+  }
+
+  res.json(invoice);
 });
 
 app.put("/update-client/:id", authenticateToken, (req, res) => {
