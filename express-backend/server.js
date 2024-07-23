@@ -12,6 +12,7 @@ const port = 5050;
 const usersFilePath = path.join(__dirname, "users.json");
 const clientsFilePath = path.join(__dirname, "clients.json");
 const invoiceFilePath = path.join(__dirname, "invoice.json");
+const companiesFilePath = path.join(__dirname, "companies.json");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -107,6 +108,46 @@ app.post("/login", (req, res) => {
   );
 
   res.status(200).json({ token });
+});
+
+app.post("/register-company", authenticateToken, (req, res) => {
+  const { companyName, companyEmail, companyContactNo, address, gstNumber } = req.body;
+  const { id: userId } = req.user;
+
+  const companies = readData(companiesFilePath);
+  const companyExists = companies.find((c) => c.userId === userId);
+
+  if (companyExists) {
+    return res.status(400).json({ message: "Company already registered" });
+  }
+
+  const companyId = generateId();
+
+  const newCompany = {
+    id: companyId,
+    userId,
+    companyName,
+    companyEmail,
+    companyContactNo,
+    address,
+    gstNumber,
+  };
+  companies.push(newCompany);
+  writeData(companiesFilePath, companies);
+
+  res.status(201).json({ message: "Company registered successfully" });
+});
+
+app.get("/company", authenticateToken, (req, res) => {
+  const { id: userId } = req.user;
+  const companies = readData(companiesFilePath);
+  const userCompany = companies.find((company) => company.userId === userId);
+
+  if (!userCompany) {
+    return res.status(404).json({ message: "Company not found" }); 
+  }
+
+  res.json(userCompany);
 });
 
 app.post("/add-client", authenticateToken, (req, res) => {

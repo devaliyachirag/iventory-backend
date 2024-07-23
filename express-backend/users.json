@@ -22,5 +22,13 @@
     "firstname": "suid",
     "lastname": "demo",
     "gender": "male"
+  },
+  {
+    "id": "_joao8tpxo",
+    "email": "fake_user5@officehourtesting.com",
+    "password": "$2a$08$zVcTaREFXCxf6.MGhl4FleZOZRY5F1stDeUHTiSU7WWpWAdJjLvae",
+    "firstname": "suid",
+    "lastname": "dgg",
+    "gender": "male"
   }
 ]

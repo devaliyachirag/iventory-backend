@@ -1,0 +1,38 @@
+[
+  {
+    "id": "_lplsdct1r",
+    "userId": "_aqu2uicg8",
+    "companyName": "codeWinglet",
+    "companyEmail": "codewinglet@gmail.com",
+    "companyContactNo": "1234567890",
+    "address": "sitanagar,punagam,surat.",
+    "gstNumber": "456789"
+  },
+  {
+    "id": "_lwzkm4k5c",
+    "userId": "_bur53sp75",
+    "companyName": "devotee",
+    "companyEmail": "devotee@gmail.com",
+    "companyContactNo": "1234567890",
+    "address": "Mota varacha,Surat",
+    "gstNumber": "456789"
+  },
+  {
+    "id": "_p7wl1dpgm",
+    "userId": "_joao8tpxo",
+    "companyName": "webiots",
+    "companyEmail": "webiots@gmail.com",
+    "companyContactNo": "1234567890",
+    "address": "Yogichok,Surat",
+    "gstNumber": "753159"
+  },
+  {
+    "id": "_nfqkuo3tm",
+    "userId": "_ys2x6es39",
+    "companyName": "d2webtech",
+    "companyEmail": "d2webtech@gmail.com",
+    "companyContactNo": "1234567890",
+    "address": "Mohan Nagar , VARACHHA , SURAT",
+    "gstNumber": "789456"
+  }
+]

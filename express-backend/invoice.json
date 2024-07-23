@@ -12,12 +12,6 @@
         "amount": 15000,
         "quantity": "12",
         "total": 165000
-      },
-      {
-        "name": "Cable",
-        "amount": "1000",
-        "quantity": "15",
-        "total": 0
       }
     ]
   },
