@@ -80,22 +80,6 @@
     ]
   },
   {
-    "id": "_w1h9qpj6s",
-    "userId": "_aqu2uicg8",
-    "invoiceDate": "2024-06-30T18:30:00.000Z",
-    "invoiceNumber": "78956",
-    "invoiceDueDate": "2024-07-30T18:30:00.000Z",
-    "clientId": "_n1k5dg3bu",
-    "items": [
-      {
-        "name": "power cable",
-        "amount": 120,
-        "quantity": 2,
-        "total": 240
-      }
-    ]
-  },
-  {
     "id": "_pekaeszjy",
     "userId": "_aqu2uicg8",
     "invoiceDate": "2024-06-29T18:30:00.000Z",
